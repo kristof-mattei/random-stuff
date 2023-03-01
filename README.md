@@ -12,12 +12,23 @@ PATH=/mnt/c/Users/Kristof/AppData/Local/Microsoft/Edge/User Data/Default/Prefere
 jq ".omnibox.prevent_url_elisions=true" "${PATH}" > /tmp/edge_temp && mv /tmp/edge_temp ${PATH}
 ```
 
-# Disable Bing search
+# Start Menu: Disable Bing search
 
 `BingSearchEnabled`
 
-See ... just found on the web
+Found on the web. 
 
 ```pwsh
 New-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Search" -Name "BingSearchEnabled" -Value 0 -PropertyType "DWORD" -Force
+```
+
+# Edge: Disable Bing in Sidebar Search
+
+`SearchInSidebarEnabled`
+
+See https://learn.microsoft.com/en-us/deployedge/microsoft-edge-policies#searchinsidebarenabled
+
+(as Admin)
+```pwsh
+[Microsoft.Win32.Registry]::SetValue("HKEY_LOCAL_MACHINE\Software\Policies\Microsoft\Edge", "SearchInSidebarEnabled", "2", [Microsoft.Win32.RegistryValueKind]::DWord)
 ```
