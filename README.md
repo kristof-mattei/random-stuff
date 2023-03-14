@@ -16,10 +16,13 @@ jq ".omnibox.prevent_url_elisions=true" "${PATH}" > /tmp/edge_temp && mv /tmp/ed
 
 `BingSearchEnabled`
 
-Found on the web. 
+Found on the web.
 
+This one does NOT work with `HKEY_LOCAL_MACHINE`.
+
+(as Admin)
 ```pwsh
-New-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Search" -Name "BingSearchEnabled" -Value 0 -PropertyType "DWORD" -Force
+[Microsoft.Win32.Registry]::SetValue("HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Search", "BingSearchEnabled", "0", [Microsoft.Win32.RegistryValueKind]::DWord)
 ```
 
 # Edge: Disable Bing in Sidebar Search
