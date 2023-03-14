@@ -32,3 +32,14 @@ See https://learn.microsoft.com/en-us/deployedge/microsoft-edge-policies#searchi
 ```pwsh
 [Microsoft.Win32.Registry]::SetValue("HKEY_LOCAL_MACHINE\Software\Policies\Microsoft\Edge", "SearchInSidebarEnabled", "2", [Microsoft.Win32.RegistryValueKind]::DWord)
 ```
+
+# Edge: Disable Big button top right (discover?)
+
+`HubsSidebarEnabled`
+
+See https://learn.microsoft.com/en-us/deployedge/microsoft-edge-policies#hubssidebarenabled
+
+(as Admin)
+```pwsh
+[Microsoft.Win32.Registry]::SetValue("HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Edge", "HubsSidebarEnabled", "0", [Microsoft.Win32.RegistryValueKind]::DWord)
+```
