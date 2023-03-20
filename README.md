@@ -10,26 +10,33 @@ See https://chromium.googlesource.com/chromium/src/+/4d46fb81638ef502663f2db0926
 ```pwsh
 
 # stop all instances of msedge.exe... by force. Save your stuff!
+Stop-Process -Name "msedge"
 
-Stop-Process -Name "msedge.exe"
+# or better, go to tripple dot > Close Microsoft Edge 
 
+# path to settings
 $path = ("{0}\Microsoft\Edge\User Data\Default\Preferences" -f $env:LOCALAPPDATA)
 
+# read settings
 $preferences = Get-Content $path | ConvertFrom-Json -AsHashTable
+
+# we're nice, we don't want to just overwrite what is ther
+# so we make sure omnibox exists or not
 if ($preferences.omnibox -eq $null) {
+    # doesn't exist, set to empty hashtable
     $preferences.omnibox = @{}
 }
 
+# add our value
 $preferences.omnibox.Add("prevent_url_elisions", $True)
 
+# dump back to disk. Notice -Depth 100 as pwsh by default stops at 2 (to prevent infinite recursion?)
 $preferences | ConvertTo-Json -Compress -Depth 100 | Set-Content $path
 
+# Launch Edge
 
-# Launch Edge, visit http://neverssl.com, should show Not secure "http://"
-
-# Verify
+# Verify AFTER you've launched Edge, to see if it stuck
 $preferences = Get-Content $path | ConvertFrom-Json -AsHashTable
-
 $preferences.omnibox
 
 # Should print
@@ -40,6 +47,10 @@ $preferences.omnibox
 # Name                           Value
 # ----                           -----
 # prevent_url_elisions           True
+
+
+# OR
+# Launch Edge, visit http://neverssl.com, should show Not secure "http://"
 ```
 
 # Start Menu: Disable Bing search
