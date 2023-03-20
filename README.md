@@ -7,9 +7,39 @@
 See https://chromium.googlesource.com/chromium/src/+/4d46fb81638ef502663f2db09266bad6eb0ea12b/components/omnibox/browser/omnibox_prefs.cc#39
 
 
-```bash
-PATH=/mnt/c/Users/Kristof/AppData/Local/Microsoft/Edge/User Data/Default/Preferences
-jq ".omnibox.prevent_url_elisions=true" "${PATH}" > /tmp/edge_temp && mv /tmp/edge_temp ${PATH}
+```pwsh
+
+# stop all instances of msedge.exe... by force. Save your stuff!
+
+Stop-Process -Name "msedge.exe"
+
+$path = ("{0}\Microsoft\Edge\User Data\Default\Preferences" -f $env:LOCALAPPDATA)
+
+$preferences = Get-Content $path | ConvertFrom-Json -AsHashTable
+if ($preferences.omnibox -eq $null) {
+    $preferences.omnibox = @{}
+}
+
+$preferences.omnibox.Add("prevent_url_elisions", $True)
+
+$preferences | ConvertTo-Json -Compress -Depth 100 | Set-Content $path
+
+
+# Launch Edge, visit http://neverssl.com, should show Not secure "http://"
+
+# Verify
+$preferences = Get-Content $path | ConvertFrom-Json -AsHashTable
+
+$preferences.omnibox
+
+# Should print
+
+# ~
+# ❯ $preferences.omnibox
+
+# Name                           Value
+# ----                           -----
+# prevent_url_elisions           True
 ```
 
 # Start Menu: Disable Bing search
@@ -77,3 +107,4 @@ See https://learn.microsoft.com/en-us/deployedge/microsoft-edge-policies#hubssid
 ```pwsh
 [Microsoft.Win32.Registry]::SetValue("HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Lenovo\Commercial Vantage", "page.wifiSecurity", "1", [Microsoft.Win32.RegistryValueKind]::DWord)
 ```
+
