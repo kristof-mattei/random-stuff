@@ -46,3 +46,34 @@ See https://learn.microsoft.com/en-us/deployedge/microsoft-edge-policies#hubssid
 ```pwsh
 [Microsoft.Win32.Registry]::SetValue("HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Edge", "HubsSidebarEnabled", "0", [Microsoft.Win32.RegistryValueKind]::DWord)
 ```
+
+# WSL: Fix `/sbin/ldconfig.real: /usr/lib/wsl/lib/libcuda.so.1 is not a symbolic link`
+
+(as Admin in CMD)
+```cmd
+wsl --shutdown
+cd c:\Windows\System32\lxss\lib
+del libcuda.so
+del libcuda.so.1
+
+mklink libcuda.so libcuda.so.1.1
+mklink libcuda.so.1 libcuda.so.1.1
+```
+
+[Wait ~8 seconds...](https://learn.microsoft.com/en-us/windows/wsl/wsl-config#the-8-second-rule)
+
+(in WSL)
+```sh
+sudo apt reinstall libc-bin
+```
+
+# Lenovo Commercial Vantage: Disable WiFi Security
+
+`HubsSidebarEnabled`
+
+See https://learn.microsoft.com/en-us/deployedge/microsoft-edge-policies#hubssidebarenabled
+
+(as Admin)
+```pwsh
+[Microsoft.Win32.Registry]::SetValue("HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Lenovo\Commercial Vantage", "page.wifiSecurity", "1", [Microsoft.Win32.RegistryValueKind]::DWord)
+```
