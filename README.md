@@ -119,7 +119,7 @@ See https://learn.microsoft.com/en-us/deployedge/microsoft-edge-policies#hubssid
 [Microsoft.Win32.Registry]::SetValue("HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Lenovo\Commercial Vantage", "page.wifiSecurity", "1", [Microsoft.Win32.RegistryValueKind]::DWord)
 ```
 
-# Edge: Enable Adobe Acrobat PDF, disable subsription nag
+# Edge: Enable Adobe Acrobat PDF, disable subscription nag
 
 `NewPDFReaderEnabled` & `ShowAcrobatSubscriptionButton`
 
@@ -129,5 +129,16 @@ See https://learn.microsoft.com/en-us/deployedge/microsoft-edge-policies#newpdfr
 ```pwsh
 [Microsoft.Win32.Registry]::SetValue("HKEY_LOCAL_MACHINE\Software\Policies\Microsoft\Edge", "NewPDFReaderEnabled", "1", [Microsoft.Win32.RegistryValueKind]::DWord)
 [Microsoft.Win32.Registry]::SetValue("HKEY_LOCAL_MACHINE\Software\Policies\Microsoft\Edge", "ShowAcrobatSubscriptionButton", "0", [Microsoft.Win32.RegistryValueKind]::DWord)
+
+```
+# Windows 11: Disable Widgets
+
+`AllowNewsAndInterests`
+
+See https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-newsandinterests#allownewsandinterests
+
+(as Admin)
+```pwsh
+[Microsoft.Win32.Registry]::SetValue("HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Dsh", "AllowNewsAndInterests", "0", [Microsoft.Win32.RegistryValueKind]::DWord)
 
 ```
