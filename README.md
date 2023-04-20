@@ -142,3 +142,16 @@ See https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-n
 [Microsoft.Win32.Registry]::SetValue("HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Dsh", "AllowNewsAndInterests", "0", [Microsoft.Win32.RegistryValueKind]::DWord)
 
 ```
+
+```
+# Windows 11: Disable Recommended section in start menu
+
+`HideRecommendedSection`
+
+See https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-start#hiderecommendedsection
+
+(as Admin)
+```pwsh
+[Microsoft.Win32.Registry]::SetValue("HKEY_LOCAL_MACHINE\Software\Policies\Microsoft\Windows\Explorer", "HideRecommendedSection", "1", [Microsoft.Win32.RegistryValueKind]::DWord)
+
+```
