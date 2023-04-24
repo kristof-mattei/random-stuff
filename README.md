@@ -143,7 +143,6 @@ See https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-n
 
 ```
 
-```
 # Windows 11: Disable Recommended section in start menu
 
 `HideRecommendedSection`
