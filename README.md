@@ -154,3 +154,20 @@ See https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-s
 [Microsoft.Win32.Registry]::SetValue("HKEY_LOCAL_MACHINE\Software\Policies\Microsoft\Windows\Explorer", "HideRecommendedSection", "1", [Microsoft.Win32.RegistryValueKind]::DWord)
 
 ```
+
+
+...
+```
+wsl --shutdown
+
+
+wsl --export docker-desktop-data D:\docker-desktop-data.tar
+wsl --unregister docker-desktop-data
+wsl --import docker-desktop-data D:\WSL\docker-desktop-data D:\docker-desktop-data.tar --version 2
+
+
+wsl --export docker-desktop D:\docker-desktop.tar
+wsl --unregister docker-desktop
+wsl --import docker-desktop D:\WSL\docker-desktop D:\docker-desktop.tar --version 2
+
+```
