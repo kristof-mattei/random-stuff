@@ -154,3 +154,18 @@ See https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-s
 [Microsoft.Win32.Registry]::SetValue("HKEY_LOCAL_MACHINE\Software\Policies\Microsoft\Windows\Explorer", "HideRecommendedSection", "1", [Microsoft.Win32.RegistryValueKind]::DWord)
 
 ```
+
+# Postgres: enable logging without restarting
+
+```
+ALTER SYSTEM SET log_statement = 'all';
+SELECT pg_reload_conf();
+```
+
+Exit and log container output.
+
+To reset:
+```
+ALTER SYSTEM RESET log_statement;
+SELECT pg_reload_conf();
+```
