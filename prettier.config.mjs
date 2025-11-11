@@ -11,22 +11,15 @@ export default {
     useTabs: false,
     overrides: [
         {
-            files: ["*.json"],
-            options: {
-                trailingComma: "none",
-                printWidth: 80,
-            },
-        },
-        {
-            files: ["*.toml"],
-            options: {
-                printWidth: 80,
-            },
-        },
-        {
-            files: ["*.ts", "*.tsx"],
+            files: ["**/*.ts", "**/*.tsx"],
             options: {
                 parser: "typescript",
+            },
+        },
+        {
+            files: ["**/*.json"],
+            options: {
+                trailingComma: "none",
             },
         },
         {
@@ -36,11 +29,10 @@ export default {
             },
         },
         {
-            files: ["package.json"],
+            files: ["package.json", "package-lock.json"],
             options: {
                 tabWidth: 2,
             },
         },
     ],
-    plugins: ["prettier-plugin-sh", "prettier-plugin-toml"],
 };
