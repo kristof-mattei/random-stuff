@@ -180,3 +180,19 @@ To reset:
 ALTER SYSTEM RESET log_statement;
 SELECT pg_reload_conf();
 ```
+
+# Hide pesky Windows Updates:
+
+For some reason Windows wants to roll-back certain drivers. Why? I don't know.
+
+List installed Windows Updates:
+
+```pwsh
+ Get-WUHistory | Format-Table -Property @{ Name = "UpdateID"; Expr = { $_.UpdateIdentity.UpdateID } }, @{ Name = "RevisionNumber"; Expr = { $_.UpdateIdentity.RevisionNumber } }, Title
+```
+
+For example, to hide `Wacom Technology - HIDClass - 7.7.2.44`:
+
+```pwsh
+Hide-WindowsUpdate -UpdateID "32177145-fc17-4aee-b61a-03036dca296e" -RevisionNumber 1
+```
