@@ -1,12 +1,15 @@
-import type { Config } from "prettier";
+import type { OxfmtConfig } from "oxfmt";
+import { defineConfig } from "oxfmt";
 
-const config: Config = {
+const config: OxfmtConfig = defineConfig({
     arrowParens: "always",
     bracketSpacing: true,
+    jsdoc: true,
     printWidth: 120,
     quoteProps: "as-needed",
     semi: true,
     singleQuote: false,
+    sortImports: true,
     tabWidth: 4,
     trailingComma: "all",
     useTabs: false,
@@ -14,8 +17,8 @@ const config: Config = {
         {
             files: ["*.json"],
             options: {
-                trailingComma: "none",
                 printWidth: 80,
+                trailingComma: "none",
             },
         },
         {
@@ -25,22 +28,12 @@ const config: Config = {
             },
         },
         {
-            files: ["*.ts", "*.tsx"],
-            options: {
-                parser: "typescript",
-            },
-        },
-        {
             files: ["*.yaml", "*.yml"],
             options: {
                 tabWidth: 2,
             },
         },
     ],
-    plugins: [
-        //"prettier-plugin-sh",
-        "prettier-plugin-toml",
-    ],
-};
+});
 
 export default config;
